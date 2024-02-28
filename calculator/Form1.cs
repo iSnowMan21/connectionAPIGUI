@@ -45,7 +45,6 @@ namespace calculator
                 adapter = new MySqlDataAdapter(command);
                 dataTable = new DataTable();
                 adapter.Fill(dataTable);
-
                 dataGridView1.DataSource = dataTable;
             }
            
@@ -88,27 +87,32 @@ namespace calculator
         {
 
         }
+
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox2.SelectedItem != null && comboBox2.SelectedItem.ToString() == "Add Film")
-            {   
+            if(comboBox2.SelectedItem != null)
+            {
                 textBox1.Visible = true;
                 label2.Visible = true;
                 button1.Visible = true;
                 dataGridView1.Visible = true;
-                label2.Text = "Введите ключевое слово для добавление фильма";
+                LoadData();
+                dataGridView1.ForeColor = Color.Red;
+                dataGridView1.GridColor = Color.Green;
+            }
+            if (comboBox2.SelectedItem != null && comboBox2.SelectedItem.ToString() == "Add Film")
+            {   
+                label2.Text = "Введите ключевое слово для добавление фильма " + comboBox2.Text;
             }
             
 
             if (comboBox2.SelectedItem != null && comboBox2.SelectedItem.ToString() == "Remove Film")
-            {
+            { 
                 label2.Text = "Введите фильм который хотите удалить";
-                dataGridView1.Visible = true;
             }
             if (comboBox2.SelectedItem != null && comboBox2.SelectedItem.ToString() == "Info")
             {
-                label2.Text = "Введите дату выхода фильма для просмотра информации";
-                dataGridView1.Visible = true;
+                label2.Text = "Введите дату выхода фильма для просмотра информации";     
             }
         }
         private void button1_Click_1(object sender, EventArgs e)
