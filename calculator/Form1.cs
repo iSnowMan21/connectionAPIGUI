@@ -1,57 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
 
-namespace calculator
+
+namespace ConnectionAPIGUI
 {
     public partial class Form1 : Form
     {
-        private string server = "localhost";
-        private string database = "imdb";
-        private string uid = "root";
-        private string password = "1234";
-        private MySqlConnection connection;
-        private MySqlCommand command;
-        private MySqlDataAdapter adapter;
+        private ConnectionWithDataBase con = new ConnectionWithDataBase();
+
         private DataTable dataTable;
         public Form1()
         {
             InitializeComponent();
 
-            InitializeDatabase();
             LoadData();
         }
-        private void InitializeDatabase()
-        {
-            string connectionString = $"SERVER={server};DATABASE={database};UID={uid};PASSWORD={password};";
-            connection = new MySqlConnection(connectionString);
-        }
+        
         private void LoadData()
         {
-            try
-            {
-                string query = "SELECT * FROM film_info";
-
-                connection.Open();
-
-                command = new MySqlCommand(query, connection);
-                adapter = new MySqlDataAdapter(command);
-                dataTable = new DataTable();
-                adapter.Fill(dataTable);
-                dataGridView1.DataSource = dataTable;
-            }
+            
+            dataTable = new DataTable();
+            con.LoadDataForDataGridView().Fill(dataTable);
+                
+            dataGridView1.DataSource = dataTable;
+            
            
-            finally
-            {
-                connection.Close();
-            }
         }
     
         
@@ -117,8 +91,12 @@ namespace calculator
         }
         private void button1_Click_1(object sender, EventArgs e)
         {
-            
-           
+            if(comboBox2.Text == "Add Film")
+            {
+                Commands.addFilm(con, textBox1.Text);
+                //label2.Text = textBox1.Text;
+            }
+            LoadData();
         }
 
         

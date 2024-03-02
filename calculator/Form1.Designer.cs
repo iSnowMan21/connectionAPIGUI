@@ -1,4 +1,4 @@
-﻿namespace calculator
+﻿namespace ConnectionAPIGUI
 {
     partial class Form1
     {
