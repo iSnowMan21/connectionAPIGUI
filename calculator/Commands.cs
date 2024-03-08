@@ -8,8 +8,9 @@ namespace ConnectionAPIGUI
     internal class Commands
     {
 
-        public static void addFilm(ConnectionWithDataBase conn, string keyword)
+        public static string addFilm(ConnectionWithDataBase conn, string keyword)
         {
+            string strInsert = "";
             var client = new HttpClient();
             client.BaseAddress = new Uri("https://www.omdbapi.com/");
             client.DefaultRequestHeaders.Accept.Add(
@@ -22,7 +23,8 @@ namespace ConnectionAPIGUI
                 Answer ans = JsonConvert.DeserializeObject<Answer>(dataObjects);
                 if (ans != null)
                 {
-                    conn.Insert(ans);
+                    
+                    strInsert = conn.Insert(ans);
                 }
                 else
                 {
@@ -30,14 +32,10 @@ namespace ConnectionAPIGUI
                 }
 
             }
-
+            return strInsert;
         }
-        public static void DeleteMovie(ConnectionWithDataBase conn)
+        public static void DeleteMovie(ConnectionWithDataBase conn,string titleToDelete)
         {
-            Console.WriteLine("Введите название фильма для удаления: ");
-            string titleToDelete = Console.ReadLine();
-
-           
             conn.Delete(titleToDelete);
             Console.WriteLine($"Фильм с названием {titleToDelete} удален");
         }
@@ -47,14 +45,7 @@ namespace ConnectionAPIGUI
             Console.WriteLine($"Количество фильмов в базе данных: {movieCount}");
         }
 
-        public static void Info(ConnectionWithDataBase conn)
-        {
-            Console.WriteLine("Введите год для получения информации: ");
-            string yearMovie = Console.ReadLine();
-
-
-            conn.InfoYear(yearMovie);
-        }
+        
         public static void InfoByTitle(ConnectionWithDataBase conn)
         {
             Console.WriteLine("Введите часть названия для поиска информации: ");

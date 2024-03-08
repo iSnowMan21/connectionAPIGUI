@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 
+
 namespace ConnectionAPIGUI
 {
     internal class ConnectionWithDataBase
@@ -106,8 +107,9 @@ namespace ConnectionAPIGUI
                 }
             }
         }
-        internal void Insert(Answer ans)
+        internal string  Insert(Answer ans)
         {
+            string str = "";
             if (this.OpenConnection() == true)
             {
                 foreach (var movie in ans.search)
@@ -120,12 +122,15 @@ namespace ConnectionAPIGUI
                     }
                     else
                     {
-                        Console.WriteLine($"Фильм с названием {movie.Title} уже существует в базе данных");
+                        str += $"\nФильм с названием {movie.Title} уже существует в базе данных";
+                        
                     }
 
                 }
                 this.CloseConnection();
+                
             }
+            return str;
         }
 
         //Update statement
@@ -214,23 +219,25 @@ namespace ConnectionAPIGUI
          * 
          */
 
-        internal void InfoYear(string yearMovie)
+        internal MySqlDataAdapter InfoYear(string yearMovie)
         {
 
-            String query = $"SELECT* FROM film_info WHERE Year LIKE '{yearMovie}%'";
-            connection.Open();
-            using (MySqlCommand command = new MySqlCommand(query, connection))
-            {
-                using (MySqlDataReader reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        Console.WriteLine("imdbID- {0}, type - {1}, title - {2}\n", reader.GetString(0), reader.GetString(1), reader.GetString(2));
 
-                    }
-                }
+            try
+            {
+                String query = $"SELECT* FROM film_info WHERE Year LIKE '{yearMovie}%'";
+
+                connection.Open();
+
+                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                return adapter;
             }
-            connection.Close();
+
+            finally
+            {
+                connection.Close();
+            }
             //------------------------------
 
         }

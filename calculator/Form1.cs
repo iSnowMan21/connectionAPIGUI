@@ -22,13 +22,18 @@ namespace ConnectionAPIGUI
             
             dataTable = new DataTable();
             con.LoadDataForDataGridView().Fill(dataTable);
-                
             dataGridView1.DataSource = dataTable;
-            
-           
         }
-    
-        
+
+        private void LoadDataInfoYear(string year)
+        {
+
+            dataTable = new DataTable();
+            con.InfoYear(year).Fill(dataTable);
+            dataGridView1.DataSource = dataTable;
+        }
+
+
         private void Form1_Load(object sender, EventArgs e)
         {
 
@@ -86,17 +91,41 @@ namespace ConnectionAPIGUI
             }
             if (comboBox2.SelectedItem != null && comboBox2.SelectedItem.ToString() == "Info")
             {
-                label2.Text = "Введите дату выхода фильма для просмотра информации";     
-            }
+                label2.Text = "Введите дату выхода фильма для просмотра информации";
+                textBox1.Visible = true;
+                label2.Visible = true;
+                button1.Visible = true;
+                dataGridView1.Visible = true;
+           }
+
         }
         private void button1_Click_1(object sender, EventArgs e)
         {
             if(comboBox2.Text == "Add Film")
             {
-                Commands.addFilm(con, textBox1.Text);
+                label3.Text = Commands.addFilm(con, textBox1.Text);
+
                 //label2.Text = textBox1.Text;
+                LoadData();
+                
             }
-            LoadData();
+
+            if (comboBox2.Text == "Remove Film")
+            {
+                Commands.DeleteMovie(con, textBox1.Text);
+                LoadData();
+            }
+            if (comboBox2.Text == "Info")
+            {
+                LoadDataInfoYear(textBox1.Text);
+            }
+           
+           
+        }
+
+        public static void label4_Click(object sender, EventArgs e)
+        {
+
         }
 
         
