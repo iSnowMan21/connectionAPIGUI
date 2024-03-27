@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Drawing;
 using System.Windows.Forms;
 
 
@@ -50,6 +51,14 @@ namespace ConnectionAPIGUI
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
+            if(textBox1.Text != "")
+            {
+                button1.Visible = true;
+            }
+            else
+            {
+                button1.Visible = false;
+            }
 
         }
 
@@ -73,30 +82,31 @@ namespace ConnectionAPIGUI
             {
                 textBox1.Visible = true;
                 label2.Visible = true;
-                button1.Visible = true;
                 dataGridView1.Visible = true;
                 LoadData();
                 dataGridView1.ForeColor = Color.Red;
                 dataGridView1.GridColor = Color.Green;
             }
             if (comboBox2.SelectedItem != null && comboBox2.SelectedItem.ToString() == "Add Film")
-            {   
+            {
                 label2.Text = "Введите ключевое слово для добавление фильма " + comboBox2.Text;
+                label3.Text = "";
             }
-            
+
 
             if (comboBox2.SelectedItem != null && comboBox2.SelectedItem.ToString() == "Remove Film")
             { 
                 label2.Text = "Введите фильм который хотите удалить";
+                label3.Text = "";
             }
             if (comboBox2.SelectedItem != null && comboBox2.SelectedItem.ToString() == "Info")
             {
                 label2.Text = "Введите дату выхода фильма для просмотра информации";
                 textBox1.Visible = true;
                 label2.Visible = true;
-                button1.Visible = true;
                 dataGridView1.Visible = true;
-           }
+                label3.Text = "";
+            }
 
         }
         private void button1_Click_1(object sender, EventArgs e)
@@ -112,7 +122,7 @@ namespace ConnectionAPIGUI
 
             if (comboBox2.Text == "Remove Film")
             {
-                Commands.DeleteMovie(con, textBox1.Text);
+                label3.Text = Commands.DeleteMovie(con, textBox1.Text);
                 LoadData();
             }
             if (comboBox2.Text == "Info")

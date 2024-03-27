@@ -47,7 +47,7 @@ namespace ConnectionAPIGUI
             "Add Film",
             "Remove Film",
             "Info"});
-            this.comboBox2.Location = new System.Drawing.Point(4, 28);
+            this.comboBox2.Location = new System.Drawing.Point(4, 25);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(227, 21);
             this.comboBox2.TabIndex = 1;
@@ -56,7 +56,8 @@ namespace ConnectionAPIGUI
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1, 12);
+            this.label1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label1.Location = new System.Drawing.Point(67, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(95, 13);
             this.label1.TabIndex = 2;
@@ -64,7 +65,7 @@ namespace ConnectionAPIGUI
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(4, 68);
+            this.textBox1.Location = new System.Drawing.Point(4, 78);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(227, 20);
             this.textBox1.TabIndex = 3;
@@ -74,7 +75,8 @@ namespace ConnectionAPIGUI
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(1, 52);
+            this.label2.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label2.Location = new System.Drawing.Point(1, 62);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(134, 13);
             this.label2.TabIndex = 4;
@@ -84,7 +86,7 @@ namespace ConnectionAPIGUI
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(4, 94);
+            this.button1.Location = new System.Drawing.Point(4, 104);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(72, 23);
             this.button1.TabIndex = 5;
@@ -98,10 +100,10 @@ namespace ConnectionAPIGUI
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.GridColor = System.Drawing.Color.Cyan;
-            this.dataGridView1.Location = new System.Drawing.Point(357, 12);
+            this.dataGridView1.Location = new System.Drawing.Point(493, 2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(560, 269);
+            this.dataGridView1.Size = new System.Drawing.Size(560, 521);
             this.dataGridView1.TabIndex = 7;
             this.dataGridView1.Visible = false;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
@@ -109,7 +111,7 @@ namespace ConnectionAPIGUI
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 156);
+            this.label3.Location = new System.Drawing.Point(1, 149);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(0, 13);
             this.label3.TabIndex = 8;
@@ -119,7 +121,7 @@ namespace ConnectionAPIGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.BackColor = System.Drawing.Color.Snow;
             this.ClientSize = new System.Drawing.Size(1065, 524);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dataGridView1);

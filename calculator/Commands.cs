@@ -15,7 +15,7 @@ namespace ConnectionAPIGUI
             client.BaseAddress = new Uri("https://www.omdbapi.com/");
             client.DefaultRequestHeaders.Accept.Add(
                new MediaTypeWithQualityHeaderValue("application/json"));
-            var response = client.GetAsync($"?apikey=d554bc03&s={keyword}&page=1").Result;
+            var response = client.GetAsync($"?apikey=d554bc03&s={keyword}&page=2").Result;
             if (response.IsSuccessStatusCode)
             {
                 // Parse the response body
@@ -28,29 +28,27 @@ namespace ConnectionAPIGUI
                 }
                 else
                 {
-                    Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+                    strInsert = $"{(int)response.StatusCode} ({response.ReasonPhrase})" ;
                 }
 
             }
             return strInsert;
         }
-        public static void DeleteMovie(ConnectionWithDataBase conn,string titleToDelete)
+        public static string DeleteMovie(ConnectionWithDataBase conn,string titleToDelete)
         {
             conn.Delete(titleToDelete);
-            Console.WriteLine($"Фильм с названием {titleToDelete} удален");
+            return $"Фильм с названием {titleToDelete} удален";
         }
-        public static void Count(ConnectionWithDataBase conn)
+        public static string Count(ConnectionWithDataBase conn)
         {
             int movieCount = conn.Count();
-            Console.WriteLine($"Количество фильмов в базе данных: {movieCount}");
+            return $"Количество фильмов в базе данных: {movieCount}";
         }
 
         
         public static void InfoByTitle(ConnectionWithDataBase conn)
         {
-            Console.WriteLine("Введите часть названия для поиска информации: ");
             string partialTitle = Console.ReadLine();
-
             conn.InfoByTitle(partialTitle);
         }
 
